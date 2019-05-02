@@ -19,9 +19,5 @@
 </head>
 <body>
     @yield('content')
-
-    <!-- Scripts here. Don't remove ↓ -->
-    {{-- <script src="{{ asset('js/base.js') }}"></script> --}}
-    {{-- <script src="/js/app.js"></script> --}}
 </body>
 </html>
