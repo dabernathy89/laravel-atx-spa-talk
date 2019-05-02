@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="{{ asset('js/todos.js') }}" defer></script>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
 
@@ -18,6 +19,10 @@
     <link rel="stylesheet" href="{{ asset('css/todo-mvc-app.css') }}">
 </head>
 <body>
-    @yield('content')
+    <div id="app">
+        @yield('content')
+    </div>
+
+    @yield('scripts')
 </body>
 </html>

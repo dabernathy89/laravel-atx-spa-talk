@@ -14,22 +14,26 @@
             <ul class="todo-list">
                 <!-- These are here just to show the structure of the list items -->
                 <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-                @foreach($lists as $list)
-                    <li>
+                    <li v-for="list in lists">
                         <div class="view">
-                            <a class="edit-list" href="/lists/{{ $list->id }}">
+                            <a class="edit-list" :href="'/lists/' + list.id">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <label>{{ $list->title }}</label>
-                            <form method="POST" action="/lists/{{ $list->id }}">
+                            <label>@{{ list.title }}</label>
+                            <form method="POST" :action="'/lists/' + list.id">
                                 {{ csrf_field() }}
                                 @method('DELETE')
                                 <button class="destroy"></button>
                             </form>
                         </div>
                     </li>
-                @endforeach
             </ul>
         </section>
     </section>
+@endsection
+
+@section('scripts')
+<script>
+    var todo_lists = @json($lists);
+</script>
 @endsection

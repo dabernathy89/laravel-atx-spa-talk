@@ -5,4 +5,11 @@
         $(e.currentTarget).parent('form').submit();
     });
 
+    var app = new Vue({
+        el: '#app',
+        data: {
+            lists: window.todo_lists || [],
+        }
+    })
+
 })(window);
