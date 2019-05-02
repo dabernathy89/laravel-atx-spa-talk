@@ -1,10 +1,4 @@
-(function (window) {
-	'use strict';
-
-	$('body').on('change', 'input[type="checkbox"].toggle', function (e) {
-        $(e.currentTarget).parent('form').submit();
-    });
-
+if (document.getElementById('todolist-home')) {
     var app = new Vue({
         el: '#app',
         data: {
@@ -30,5 +24,61 @@
             }
         }
     });
+}
 
-})(window);
+if (document.getElementById('todolist-single')) {
+    var app = new Vue({
+        el: '#app',
+        data: {
+            todo_title: '',
+            list: window.todo_list || null,
+            todos: window.todos || [],
+        },
+        computed: {
+            active() {
+                return this.todos.filter(todo => !todo.completed);
+            },
+
+            completed() {
+                return this.todos.filter(todo => todo.completed);
+            }
+        },
+        methods: {
+            create() {
+                axios.post('/lists/' + this.list.id, {
+                        'title': this.todo_title,
+                        'completed': false
+                    })
+                    .then((response) => {
+                        this.todos.push(response.data);
+                        this.todo_title = '';
+                    });
+            },
+
+            markComplete(todo_id, index) {
+                axios.patch('/lists/' + this.list.id + '/' + todo_id, {
+                        'completed': true
+                    })
+                    .then((response) => {
+                        this.todos[index].completed = true;
+                    });
+            },
+
+            markActive(todo_id, index) {
+                axios.patch('/lists/' + this.list.id + '/' + todo_id, {
+                        'completed': false
+                    })
+                    .then((response) => {
+                        this.todos[index].completed = false;
+                    });
+            },
+
+            remove(todo_id, index) {
+                axios.delete('/lists/' + this.list.id + '/' + todo_id)
+                    .then((response) => {
+                        this.todos.splice(index, 1);
+                    });
+            }
+        }
+    });
+}

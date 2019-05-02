@@ -52,29 +52,27 @@ Route::delete('/lists/{list}', function (\App\TodoList $list) {
 });
 
 Route::post('/lists/{list}', function (\Illuminate\Http\Request $request, \App\TodoList $list) {
-    \App\Todo::create([
+    $todo = \App\Todo::create([
         'title' => $request->input('title'),
         'completed' => false,
         'todo_list_id' => $list->id,
     ]);
 
-    return redirect('/lists/' . $list->id);
+    return response()->json($todo);
 });
 
 Route::patch('/lists/{list}/{todo}', function (\Illuminate\Http\Request $request, \App\TodoList $list, \App\Todo $todo) {
-    if ($request->has('title')) {
-        $todo->title = $request->input('title');
+    if ($request->has('completed')) {
+        $todo->completed = $request->input('completed');
     }
-
-    $todo->completed = $request->has('completed');
 
     $todo->save();
 
-    return redirect()->back();
+    return response()->json($todo);
 });
 
 Route::delete('/lists/{list}/{todo}', function (\App\TodoList $list, \App\Todo $todo) {
     $todo->delete();
 
-    return redirect('/lists/' . $list->id);
+    return response()->json(['success' => true]);
 });

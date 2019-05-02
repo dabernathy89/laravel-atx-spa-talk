@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="todoapp">
+    <section class="todoapp" id="todolist-home">
         <header class="header">
             <h1>todo lists</h1>
             <input class="new-todo" name="title" v-model="list_title" placeholder="Add a new list" autofocus @keyup.enter="create">
