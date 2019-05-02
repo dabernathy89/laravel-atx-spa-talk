@@ -1,7 +1,7 @@
 (function (window) {
 	'use strict';
 
-	$('input[type="checkbox"].toggle').on('change', function (e) {
+	$('body').on('change', 'input[type="checkbox"].toggle', function (e) {
         $(e.currentTarget).parent('form').submit();
     });
 
@@ -29,6 +29,6 @@
                     });
             }
         }
-    })
+    });
 
 })(window);
