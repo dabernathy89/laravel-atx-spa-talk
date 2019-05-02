@@ -4,27 +4,20 @@
     <section class="todoapp">
         <header class="header">
             <h1>todo lists</h1>
-            <form method="POST" action="/lists">
-                {{ csrf_field() }}
-                <input class="new-todo" name="title" placeholder="Add a new list" autofocus>
-            </form>
+            <input class="new-todo" name="title" v-model="list_title" placeholder="Add a new list" autofocus @keyup.enter="create">
         </header>
         <!-- This section should be hidden by default and shown when there are todos -->
         <section class="main">
             <ul class="todo-list">
                 <!-- These are here just to show the structure of the list items -->
                 <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-                    <li v-for="list in lists">
+                    <li v-for="(list, index) in lists">
                         <div class="view">
                             <a class="edit-list" :href="'/lists/' + list.id">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <label>@{{ list.title }}</label>
-                            <form method="POST" :action="'/lists/' + list.id">
-                                {{ csrf_field() }}
-                                @method('DELETE')
-                                <button class="destroy"></button>
-                            </form>
+                            <button class="destroy" @click="remove(list.id, index)"></button>
                         </div>
                     </li>
             </ul>

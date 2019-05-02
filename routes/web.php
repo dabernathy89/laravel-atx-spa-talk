@@ -19,14 +19,11 @@ Route::get('/', function () {
 });
 
 Route::post('/lists', function (\Illuminate\Http\Request $request) {
-    \App\TodoList::create([
+    $list = \App\TodoList::create([
         'title' => $request->input('title'),
     ]);
 
-    $lists = \App\TodoList::all();
-
-    return view('home')
-        ->with(['lists' => $lists]);
+    return response()->json($list);
 });
 
 Route::get('/lists/{list}', function (\App\TodoList $list) {
@@ -51,7 +48,7 @@ Route::get('/lists/{list}/completed', function (\App\TodoList $list) {
 Route::delete('/lists/{list}', function (\App\TodoList $list) {
     $list->delete();
 
-    return redirect('/');
+    return response()->json(['success' => true]);
 });
 
 Route::post('/lists/{list}', function (\Illuminate\Http\Request $request, \App\TodoList $list) {
