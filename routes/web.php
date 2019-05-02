@@ -73,7 +73,7 @@ Route::patch('/lists/{list}/{todo}', function (\Illuminate\Http\Request $request
 
     $todo->save();
 
-    return redirect('/lists/' . $list->id);
+    return redirect()->back();
 });
 
 Route::delete('/lists/{list}/{todo}', function (\App\TodoList $list, \App\Todo $todo) {
