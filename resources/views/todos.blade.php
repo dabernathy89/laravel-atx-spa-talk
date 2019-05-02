@@ -31,7 +31,6 @@
                                 <button class="destroy"></button>
                             </form>
                         </div>
-                        <input class="edit" value="{{ $todo->title }}">
                     </li>
                 @endforeach
                 @foreach($todos->where('completed', false) as $todo)
@@ -49,7 +48,6 @@
                                 <button class="destroy"></button>
                             </form>
                         </div>
-                        <input class="edit" value="Rule the web">
                     </li>
                 @endforeach
             </ul>

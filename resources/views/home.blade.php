@@ -27,7 +27,6 @@
                                 <button class="destroy"></button>
                             </form>
                         </div>
-                        <input class="edit" value="{{ $list->title }}">
                     </li>
                 @endforeach
             </ul>
