@@ -32,17 +32,13 @@ Route::get('/lists/{list}', function (\App\TodoList $list) {
 });
 
 Route::get('/lists/{list}/active', function (\App\TodoList $list) {
-    $todos = $list->todos()->whereCompleted(0)->get();
-
     return view('todos')
-        ->with(['list' => $list, 'todos' => $todos, 'filter' => 'active']);
+        ->with(['list' => $list, 'todos' => $list->todos, 'filter' => 'all']);
 });
 
 Route::get('/lists/{list}/completed', function (\App\TodoList $list) {
-    $todos = $list->todos()->whereCompleted(1)->get();
-
     return view('todos')
-        ->with(['list' => $list, 'todos' => $todos, 'filter' => 'completed']);
+        ->with(['list' => $list, 'todos' => $list->todos, 'filter' => 'all']);
 });
 
 Route::delete('/lists/{list}', function (\App\TodoList $list) {

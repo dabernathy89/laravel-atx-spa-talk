@@ -12,7 +12,7 @@
                 <!-- These are here just to show the structure of the list items -->
                 <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
 
-                    <li v-for="(todo, index) in completed" class="completed" v-bind:key="todo.id">
+                    <li v-if="$router.currentRoute.name !== 'active'" v-for="(todo, index) in completed" class="completed" v-bind:key="todo.id">
                         <div class="view">
                             <input class="toggle" name="completed" type="checkbox" checked @change="markActive(todo.id, index)">
                             <label>@{{ todo.title }}</label>
@@ -21,7 +21,7 @@
                         </div>
                     </li>
 
-                    <li v-for="(todo, index) in active" v-bind:key="todo.id">
+                    <li v-if="$router.currentRoute.name !== 'completed'" v-for="(todo, index) in active" v-bind:key="todo.id">
                         <div class="view">
                             <input class="toggle" name="completed" type="checkbox" @change="markComplete(todo.id, index)">
                             <label>@{{ todo.title }}</label>
@@ -37,13 +37,13 @@
             <!-- Remove this if you don't implement routing -->
             <ul class="filters">
                 <li>
-                    <a @if($filter === 'all') class="selected" @endif href="/lists/{{ $list->id }}">All</a>
+                    <router-link :to="{ name: 'all', params: { list_id: list.id }}">All</router-link>
                 </li>
                 <li>
-                    <a @if($filter === 'active') class="selected" @endif href="/lists/{{ $list->id }}/active">Active</a>
+                    <router-link :to="{ name: 'active', params: { list_id: list.id }}">Active</router-link>
                 </li>
                 <li>
-                    <a @if($filter === 'completed') class="selected" @endif href="/lists/{{ $list->id }}/completed">Completed</a>
+                    <router-link :to="{ name: 'completed', params: { list_id: list.id }}">Completed</router-link>
                 </li>
             </ul>
         </footer>

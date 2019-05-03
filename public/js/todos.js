@@ -27,8 +27,18 @@ if (document.getElementById('todolist-home')) {
 }
 
 if (document.getElementById('todolist-single')) {
+    let router = new VueRouter({
+        mode: 'history',
+        routes: [
+            { path: '/lists/:list_id', name: 'all' },
+            { path: '/lists/:list_id/active', name: 'active' },
+            { path: '/lists/:list_id/completed', name: 'completed' }
+        ]
+    });
+
     var app = new Vue({
         el: '#app',
+        router: router,
         data: {
             todo_title: '',
             list: window.todo_list || null,
