@@ -12,7 +12,7 @@
                 <!-- These are here just to show the structure of the list items -->
                 <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
 
-                    <li v-if="$router.currentRoute.name !== 'active'" v-for="(todo, index) in completed" class="completed" v-bind:key="todo.id">
+                    <li v-if="$route.name !== 'active'" v-for="(todo, index) in completed" class="completed" v-bind:key="todo.id">
                         <div class="view">
                             <input class="toggle" name="completed" type="checkbox" checked @change="markActive(todo.id, index)">
                             <label>@{{ todo.title }}</label>
@@ -21,7 +21,7 @@
                         </div>
                     </li>
 
-                    <li v-if="$router.currentRoute.name !== 'completed'" v-for="(todo, index) in active" v-bind:key="todo.id">
+                    <li v-if="$route.name !== 'completed'" v-for="(todo, index) in active" v-bind:key="todo.id">
                         <div class="view">
                             <input class="toggle" name="completed" type="checkbox" @change="markComplete(todo.id, index)">
                             <label>@{{ todo.title }}</label>
